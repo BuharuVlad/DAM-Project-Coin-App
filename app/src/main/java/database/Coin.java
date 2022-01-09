@@ -76,7 +76,7 @@ public class Coin  implements Serializable {
     }
 
     public Date getDate() {
-        return date;
+        return this.date;
     }
 
     public void setDate(Date date) {

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -31,6 +32,7 @@ import async.Callback;
 import database.Coin;
 import database.CoinService;
 import util.DateConvertor;
+import util.ImageConvertor;
 
 public class AddCoin extends AppCompatActivity {
 
@@ -69,6 +71,21 @@ public class AddCoin extends AppCompatActivity {
 
         intent = getIntent();
 
+        if(intent.hasExtra(COIN_KEY)){
+            //facem diferita dintre update si insert
+            coin = (Coin) intent.getSerializableExtra(COIN_KEY);
+            createViewsFromCoin();
+        }
+
+    }
+
+    private void createViewsFromCoin() {
+        if(coin ==null){
+            return;
+        }
+        tietNameCoin.setText(coin.getName());
+        tietValueCoin.setText(String.valueOf(coin.getValue()));
+        tietDateCoin.setText(DateConvertor.fromDate(coin.getDate()));
     }
 
     private void insertInDB() {
@@ -175,12 +192,16 @@ public class AddCoin extends AppCompatActivity {
         String name = tietNameCoin.getText().toString();
         Double value = Double.parseDouble(tietValueCoin.getText().toString());
         Date date = DateConvertor.fromString(tietDateCoin.getText().toString());
-        byte[] imageArray = convertImageToArray(imageView);
-
-        if(imageView != null) {
-            Log.i("AddCoinActivity", "Image Array ok " + imageArray);
+        byte[] imageArray = ImageConvertor.convertImageToArray(imageView);
+        if(coin == null){
+            coin = new Coin(name, value, date, imageArray);
+        } else{
+            coin.setName(name);
+            coin.setValue(value);
+            coin.setDate(date);
+            coin.setImage(imageArray);
         }
-        return new Coin(name, value, date, imageArray);
+        return coin;
     }
 
 
@@ -205,16 +226,6 @@ public class AddCoin extends AppCompatActivity {
         } catch (Exception e){
             Log.e("AddCoinActivity", e.getMessage());
         }
-    }
-
-
-    private byte[] convertImageToArray(ImageView imageView){
-        Bitmap bitmapImage = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-
-        byte[] bytes = stream.toByteArray();
-        return bytes;
     }
 
 }

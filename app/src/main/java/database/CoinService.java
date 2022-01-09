@@ -48,32 +48,27 @@ public class CoinService {
     }
 
     public void getAll(Callback<List<Coin>> activityThread) {
-        Log.i("ListOfCoins", "getAll 1");
-        Callable<List<Coin>> gellAllOperation = new Callable<List<Coin>>() {
+        Callable<List<Coin>> getAllOperation = new Callable<List<Coin>>() {
             @Override
             public List<Coin> call() {
-
-                Log.i("ListOfCoins", "getAll 2");
                 return coinDao.getAll();
             }
         };
-
-        Log.i("ListOfCoins", "getAll 3");
-        asyncTaskRunner.executeAsync(gellAllOperation, activityThread);
+        asyncTaskRunner.executeAsync(getAllOperation, activityThread);
     }
 
-    public void update(Coin Coin, Callback<Coin> activityThread) {
+    public void update(Coin coin, Callback<Coin> activityThread) {
         Callable<Coin> updateOperation = new Callable<Coin>() {
             @Override
             public Coin call() {
-                if (Coin == null || Coin.getId() <= 0) {
+                if (coin == null || coin.getId() <= 0) {
                     return null;
                 }
-                int count = coinDao.update(Coin);
+                int count = coinDao.update(coin);
                 if (count <= 0) {
                     return null;
                 }
-                return Coin;
+                return coin;
             }
         };
 

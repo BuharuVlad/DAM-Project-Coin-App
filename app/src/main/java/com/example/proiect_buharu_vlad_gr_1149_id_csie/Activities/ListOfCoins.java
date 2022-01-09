@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -40,7 +41,7 @@ public class ListOfCoins extends AppCompatActivity {
     private ActivityResultLauncher<Intent> updateCoinLauncher;
     private CoinService coinService;
 
-    private static final String COIN_URL="https://jsonkeeper.com/b/1A7R";
+    private static final String COIN_URL="https://jsonkeeper.com/b/FYWR";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,6 @@ public class ListOfCoins extends AppCompatActivity {
         coinService = new CoinService(getApplicationContext());
         coinService.getAll(getAllCoinsCallback());
 
-        Log.i("Update", "4");
         updateCoinLauncher = getUpdateCoinLauncher();
         loadCoinsFromUrl();
     }
@@ -91,7 +91,11 @@ public class ListOfCoins extends AppCompatActivity {
         addCoinAdaptor();
         floatingActionButtonAddCoin.setOnClickListener(getAddCoinClickListener());
         addCoinLauncher = getAddCoinLauncher();
+
+        lvListOfCoins.setOnItemClickListener(getItemClickEvent());
     }
+
+
 
 
     /* Initializarea componentelor din activitate */
@@ -161,11 +165,13 @@ public class ListOfCoins extends AppCompatActivity {
 
     /* preluarea tuturor monedelor din baza de date*/
     private Callback<List<Coin>> getAllCoinsCallback() {
+        Log.i("ListOfCoins", "getAllCoinsCallback");
         return new Callback<List<Coin>>() {
             @Override
             public void runResultOnUiThread(List<Coin> results) {
                 if (results != null) {
                     coins.addAll(results);
+                    Log.i("ListOfCoins", coins.toString());
                     notifyAdapter();
                 }
             }
@@ -178,6 +184,17 @@ public class ListOfCoins extends AppCompatActivity {
     private ActivityResultLauncher<Intent> getUpdateCoinLauncher() {
         ActivityResultCallback<ActivityResult> callback = getUpdateCoinActivityResultCallback();
         return registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), callback);
+    }
+
+    private AdapterView.OnItemClickListener getItemClickEvent() {
+        return new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), AddCoin.class);
+                intent.putExtra(AddCoin.COIN_KEY, coins.get(position));
+                updateCoinLauncher.launch(intent);
+            }
+        };
     }
 
     private ActivityResultCallback<ActivityResult> getUpdateCoinActivityResultCallback() {
@@ -202,11 +219,12 @@ public class ListOfCoins extends AppCompatActivity {
                 if (result != null) {
                     for (Coin expense : coins) {
                         if (expense.getId() == result.getId()) {
+
                             expense.setName(result.getName());
                             expense.setValue(result.getValue());
                             expense.setDate(result.getDate());
-                            expense.setImage(result.getImage());
                             break;
+
                         }
                     }
                     notifyAdapter();
