@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Proiect_Buharu_Vlad_Gr_1149_ID_CSIE</string>
+    <string name="hello_there_welcome_back">Hello there, Welcome Back</string>
+    <string name="name_of_coin">Name of coin</string>
+    <string name="value_of_coin">Value of coin</string>
+    <string name="anul_fabricatiei">Anul fabricatiei</string>
+    <string name="add_save">add_save</string>
+    <string name="save">save</string>
+    <string name="add_coin_name_error_message">Invalid name. Add minim 3 characters</string>
+    <string name="add_coin_value_error_message">Invalid value. Insert a positive number</string>
+    <string name="date_of_coin">Date of coin</string>
+    <string name="listOfCoins_done">done</string>
+    <string name="un_ban_din_1900">Un ban din 1900</string>
+    <string name="_20_lei">20 lei</string>
+    <string name="_01_01_1900">01.01.1900</string>
+    <string name="lv_coin_row_default_value">-</string>
+    <string name="lv_coin_row_value">%1$s lei</string>
+    <string name="login">LOGIN</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="coin_picture">coin picture</string>
+    <string name="coin_name">Coin name</string>
+    <string name="value_name">Value name</string>
+    <string name="bank_name_adaptor_default_value">-</string>
+    <string name="main_new_coin_added_message">O noua moneda a fost adaugata</string>
+    <string name="admin">admin</string>
+    <string name="passwordAdmin">admin</string>
+    <string name="loginSuccessful">LOGIN SUCCESSFUL</string>
+    <string name="loginFailed">LOGIN FAILED</string>
+</resources>
