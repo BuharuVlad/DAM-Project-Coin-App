@@ -176,11 +176,11 @@ public class ListOfCoins extends AppCompatActivity {
 
     /* Update pentru o moneda */
     private ActivityResultLauncher<Intent> getUpdateCoinLauncher() {
-        ActivityResultCallback<ActivityResult> callback = getUpdateExpenseActivityResultCallback();
+        ActivityResultCallback<ActivityResult> callback = getUpdateCoinActivityResultCallback();
         return registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), callback);
     }
 
-    private ActivityResultCallback<ActivityResult> getUpdateExpenseActivityResultCallback() {
+    private ActivityResultCallback<ActivityResult> getUpdateCoinActivityResultCallback() {
         return new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
