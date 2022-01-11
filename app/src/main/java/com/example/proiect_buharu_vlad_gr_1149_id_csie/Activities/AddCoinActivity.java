@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.util.Calendar;
 import android.net.Uri;
@@ -25,7 +22,6 @@ import android.widget.Toast;
 import com.example.proiect_buharu_vlad_gr_1149_id_csie.R;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.io.ByteArrayOutputStream;
 import java.util.*;
 
 import async.Callback;
@@ -34,7 +30,7 @@ import database.CoinService;
 import util.DateConvertor;
 import util.ImageConvertor;
 
-public class AddCoin extends AppCompatActivity {
+public class AddCoinActivity extends AppCompatActivity {
 
     public static final String COIN_KEY = "coin_key";
     private TextInputEditText tietNameCoin;
@@ -115,7 +111,7 @@ public class AddCoin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        AddCoin.this, android.R.style.Theme_Holo_Dialog_NoActionBar_MinWidth,setListener,year,month,day);
+                        AddCoinActivity.this, android.R.style.Theme_Holo_Dialog_NoActionBar_MinWidth,setListener,year,month,day);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datePickerDialog.show();
             }

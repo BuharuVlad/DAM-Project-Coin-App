@@ -1,17 +1,11 @@
 package util;
 
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import database.Coin;
 
-import java.io.ByteArrayOutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;

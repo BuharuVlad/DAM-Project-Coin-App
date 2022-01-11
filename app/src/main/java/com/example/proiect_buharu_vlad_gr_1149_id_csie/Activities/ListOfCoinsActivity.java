@@ -1,29 +1,25 @@
 package com.example.proiect_buharu_vlad_gr_1149_id_csie.Activities;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.*;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proiect_buharu_vlad_gr_1149_id_csie.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import async.Callback;
 import database.Coin;
@@ -32,9 +28,8 @@ import network.HttpManager;
 import util.CoinAdaptor;
 import util.CoinJsonParser;
 
-public class ListOfCoins extends AppCompatActivity {
+public class ListOfCoinsActivity extends AppCompatActivity {
     private ListView lvListOfCoins;
-    private ArrayAdapter<Coin> arrayAdapter;
     List<Coin> coins = new ArrayList<>();
     private FloatingActionButton floatingActionButtonAddCoin;
     private ActivityResultLauncher<Intent> addCoinLauncher;
@@ -113,7 +108,7 @@ public class ListOfCoins extends AppCompatActivity {
             @Override
             public void onActivityResult(ActivityResult result) {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    Coin coin = (Coin) result.getData().getSerializableExtra(AddCoin.COIN_KEY);
+                    Coin coin = (Coin) result.getData().getSerializableExtra(AddCoinActivity.COIN_KEY);
                     coinService.insert(coin, insertCoinCallBack());
                 }
             }
@@ -125,7 +120,7 @@ public class ListOfCoins extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddCoin.class);
+                Intent intent = new Intent(getApplicationContext(), AddCoinActivity.class);
                 addCoinLauncher.launch(intent);
             }
         };
@@ -165,13 +160,11 @@ public class ListOfCoins extends AppCompatActivity {
 
     /* preluarea tuturor monedelor din baza de date*/
     private Callback<List<Coin>> getAllCoinsCallback() {
-        Log.i("ListOfCoins", "getAllCoinsCallback");
         return new Callback<List<Coin>>() {
             @Override
             public void runResultOnUiThread(List<Coin> results) {
                 if (results != null) {
                     coins.addAll(results);
-                    Log.i("ListOfCoins", coins.toString());
                     notifyAdapter();
                 }
             }
@@ -190,8 +183,8 @@ public class ListOfCoins extends AppCompatActivity {
         return new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), AddCoin.class);
-                intent.putExtra(AddCoin.COIN_KEY, coins.get(position));
+                Intent intent = new Intent(getApplicationContext(), AddCoinActivity.class);
+                intent.putExtra(AddCoinActivity.COIN_KEY, coins.get(position));
                 updateCoinLauncher.launch(intent);
             }
         };
@@ -202,7 +195,7 @@ public class ListOfCoins extends AppCompatActivity {
             @Override
             public void onActivityResult(ActivityResult result) {
                 if (result != null && result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    Coin coin = (Coin) result.getData().getSerializableExtra(AddCoin.COIN_KEY);
+                    Coin coin = (Coin) result.getData().getSerializableExtra(AddCoinActivity.COIN_KEY);
                     //update in baza de date
                     coinService.update(coin, updateCoinCallback());
                 }
@@ -219,10 +212,8 @@ public class ListOfCoins extends AppCompatActivity {
                 if (result != null) {
                     for (Coin expense : coins) {
                         if (expense.getId() == result.getId()) {
-
                             expense.setName(result.getName());
                             expense.setValue(result.getValue());
-                            expense.setDate(result.getDate());
                             break;
 
                         }

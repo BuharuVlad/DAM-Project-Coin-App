@@ -1,0 +1,29 @@
+{
+  "type": "FeatureCollection",
+  "coins": [
+    {
+      "name": "un ban",
+      "value": 20,
+      "date": "01.01.1900",
+      "url": "https://i.ucoin.net/coin/27/165/27165323-2/romania-1-ban-1867.jpg"
+    },
+    {
+      "name": "5 bani",
+      "value": 30,
+      "date": "01.01.1900",
+      "url": "https://media1.allnumis.com/309/13-02-2016/_309_526779485e5f4ec8L.jpg"
+    },
+    {
+      "name": "10 bani",
+      "value": 30,
+      "date": "01.01.1900",
+      "url": "https://media1.allnumis.com/309/13-02-2016/_309_4762662169f60bf8L.jpg"
+    },
+    {
+      "name": "50 bani",
+      "value": 30,
+      "date": "01.01.1900",
+      "url": "https://media1.allnumis.com/309/27-04-2017/50-bani-2017-150-de-ani-de-la-adoptarea-legii-pentru-infiintarea-unui-nou-sistem-monetar-si-pentru-fabricarea-monedelor-nationalei_309_533062011e4972f7L.jpg"
+    }
+  ]
+}

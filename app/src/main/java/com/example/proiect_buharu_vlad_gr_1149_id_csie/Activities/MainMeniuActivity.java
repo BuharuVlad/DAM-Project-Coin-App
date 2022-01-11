@@ -28,7 +28,7 @@ public class MainMeniuActivity extends AppCompatActivity {
         btnAddCoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentAddCoin = new Intent(getApplicationContext(), AddCoin.class);
+                Intent intentAddCoin = new Intent(getApplicationContext(), AddCoinActivity.class);
                 startActivity(intentAddCoin);
             }
         });
@@ -39,7 +39,7 @@ public class MainMeniuActivity extends AppCompatActivity {
         btnListCoins.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentListOfCoins = new Intent(getApplicationContext(), ListOfCoins.class);
+                Intent intentListOfCoins = new Intent(getApplicationContext(), ListOfCoinsActivity.class);
                 startActivity(intentListOfCoins);
             }
         });
