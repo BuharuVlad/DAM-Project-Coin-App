@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Proiect_Buharu_Vlad_Gr_1149_ID_CSIE">
         <activity
+            android:name=".Activities.ReadJsonActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.HelloActivity"
             android:exported="false" />
         <activity

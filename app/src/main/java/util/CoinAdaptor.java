@@ -1,15 +1,10 @@
 package util;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.example.proiect_buharu_vlad_gr_1149_id_csie.R;
 
-import java.io.ByteArrayOutputStream;
+import java.util.Date;
 import java.util.List;
 
 import database.Coin;
@@ -48,23 +43,18 @@ public class CoinAdaptor extends ArrayAdapter<Coin> {
         }
         addCoinName(view, coin.getName());
         addCoinValue(view, coin.getValue());
-//        addCoinImage(view, coin.getImage());
+        addCoinDate(view, coin.getDate());
         return view;
     }
-//
-//    private void addCoinImage(View view, byte[] byteArray) {
-//        try{
-//        if(byteArray != null && byteArray.length > 0){
-//            Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-//            ImageView image = (ImageView) view.findViewById(R.id.row_iv_picture);
-//            image.setImageBitmap(Bitmap.createScaledBitmap(bmp, image.getWidth(), image.getHeight(), false));
-//        }
-//        else{
-//            Log.e("CoinAdaptor", "Can't convert the image");
-//        }} catch (Exception e){
-//            Log.e("CoinAdaptor", e.getMessage());
-//        }
-//    }
+
+    private void addCoinDate(View view, Date date) {
+        TextView textView = view.findViewById(R.id.row_iv_date);
+        if(date !=null){
+            textView.setText(DateConvertor.fromDate(date));
+        }else{
+            textView.setText("00-00-0000");
+        }
+    }
 
 
     private void addCoinValue(View view, Double value) {

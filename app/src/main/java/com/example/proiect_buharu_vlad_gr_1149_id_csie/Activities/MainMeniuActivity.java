@@ -1,18 +1,19 @@
 package com.example.proiect_buharu_vlad_gr_1149_id_csie.Activities;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proiect_buharu_vlad_gr_1149_id_csie.R;
 
 public class MainMeniuActivity extends AppCompatActivity {
     private Button btnAddCoin;
     private Button btnListCoins;
+    private Button btnListCoinsJson;
 
 
     //pentru preluarea datelor din formular completat
@@ -44,6 +45,16 @@ public class MainMeniuActivity extends AppCompatActivity {
             }
         });
         /* Lansarea activitatii de afisarea a intregii baze de date de monede si afisarea unor monede dintr-un fisier JSON preluat dupa Internet */
+
+        /* Lansarea activitatii de afisarea a intregii list de monede  dintr-un fisier JSON preluat din telefon */
+        btnListCoinsJson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentListOfCoins = new Intent(getApplicationContext(), ReadJsonActivity.class);
+                startActivity(intentListOfCoins);
+            }
+        });
+        /* Lansarea activitatii de afisarea a intregii baze de date de monede si afisarea unor monede dintr-un fisier JSON preluat dupa Internet */
     }
 
 
@@ -51,6 +62,7 @@ public class MainMeniuActivity extends AppCompatActivity {
     private void initComponents(){
         btnAddCoin = findViewById(R.id.btn_meniu_add_coin);
         btnListCoins = findViewById(R.id.btn_meniu_view_list_of_coins);
+        btnListCoinsJson = findViewById(R.id.btn_meniu_view_list_of_coins_from_json);
     }
     /* Initializarea componentelor din activitate */
 }

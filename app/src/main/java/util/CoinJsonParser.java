@@ -4,11 +4,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import database.Coin;
-
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.ArrayList;
+
+import database.Coin;
 
 public class CoinJsonParser {
     public static List<Coin> fromJson(String json){
